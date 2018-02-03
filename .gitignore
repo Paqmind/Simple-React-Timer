@@ -8,3 +8,9 @@
 *.iml
 out
 gen
+Будет удалено README.md
+Будет удалено node_modules/
+Будет удалено package-lock.json
+Будет удалено package.json
+Будет удалено public/
+Будет удалено src/

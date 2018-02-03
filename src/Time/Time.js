@@ -1,13 +1,10 @@
 import React from 'react'
 import "./Time.css"
-
 function Time(props) {
-    return (
+    return(
         <div className='row mt-20'>
-            <div className='text-center'>
-                <h1 className='Time-numbers'>{props.time}</h1>
-            </div>
+            <h1 className='Time-numbers text-center'>{props.time}</h1>
         </div>
     )
 }
-export default  Time
+export default Time;

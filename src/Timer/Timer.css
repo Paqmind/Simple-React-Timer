@@ -2,3 +2,22 @@
     border: 1px solid lightgray;
     width: 90%;
 }
+.m-25{
+    margin: 25px;
+}
+.Timer-button{
+    padding: 10px 45px;
+    font-weight: bold;
+    color: black;
+    font-size: 25px;
+    background-color: pink;
+    margin: 0 20px;
+}
+.Timer-btns{
+    padding: 10px 20px;
+    font-weight: bold;
+    color: black;
+    font-size: 25px;
+    background-color: red;
+    margin: 10px 20px;
+}
