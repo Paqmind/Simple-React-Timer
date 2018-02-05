@@ -25,6 +25,7 @@
     text-transform: uppercase;
     font-style: italic;
     margin-top: 10px;
+    width: 400px;
 }
 .Timer-btns{
     padding: 8px 20px;
