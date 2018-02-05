@@ -1,11 +1,27 @@
+body{
+    padding: 0;
+    margin: 20px;
+}
+li{
+    list-style: none;
+}
+
 .Timer{
     border: 1px solid lightgray;
-    width: 90%;
+
+}
+.flex-container{
+    display: flex;
 }
 .m-25{
     margin: 25px;
 }
-.Timer-toggle-btn{
+.Timer-format{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.Timer-format_btn{
     padding: 10px 10px;
     width: 400px;
     font-weight: 800;
@@ -15,7 +31,13 @@
     background-color: lightcoral;
     margin: 10px 20px;
 }
-.Timer-button{
+.Timer-buttons{
+    margin-left: 15%;
+    margin-top: 15px;
+    flex-wrap: wrap;
+
+}
+.Timer-toggle_btns {
     padding: 8px 115px;
     font-weight: bold;
     color: black;
@@ -25,7 +47,14 @@
     text-transform: uppercase;
     font-style: italic;
     margin-top: 10px;
-    width: 400px;
+    width: 300px;
+}
+.Timer-btn-list{
+    padding-top: 20px;
+    display: inline-flex;
+    position: relative;
+    right: 13%;
+
 }
 .Timer-btns{
     padding: 8px 20px;
@@ -34,4 +63,5 @@
     font-size: 25px;
     background-color: red;
     margin: 10px 20px;
+
 }

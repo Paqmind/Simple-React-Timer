@@ -16,17 +16,17 @@ class Timer extends React.Component{
             format: "s"
         };
     }
-    switchOnHourMinSec() {
+    switchToHMS() {
         this.setState({
             format : "hms"
         })
     }
-    switchOnMinSec = () => {
+    switchToMS = () => {
         this.setState({
             format : "ms"
         })
     };
-     switchOnSec (){
+     switchToS (){
         this.setState({
             format : "s"
         })
@@ -80,40 +80,38 @@ class Timer extends React.Component{
 
     render() {
         let seconds = this.state.seconds;
-        let formattedTime = this.state.format == "s" ? formatToS(seconds).join(":") :
-                            this.state.format == "ms" ? formatToMS(seconds).join(":")  :
-                            this.state.format =="hms" ? formatToHMS(seconds).join(":") : "Unsupported format";
+        let formattedTime = this.state.format === "s" ? formatToS(seconds).join(":") :
+                            this.state.format === "ms" ? formatToMS(seconds).join(":")  :
+                            this.state.format === "hms" ? formatToHMS(seconds).join(":") : "Unsupported format";
+        let ButtonToggle = () => this.state.isStarted ?
+                <button onClick={ ()=> this.startTimer() } className="Timer-toggle_btns">start</button> :
+                <button onClick={ ()=> this.stopTimer() } className="Timer-toggle_btns">stop</button>;
+
         return (
-            <div className="container Timer">
+            <div className="Timer">
                 <Time time={formattedTime} />
+                <div className="flex-container">
+                    <div className="Timer-format">
+                        <ul>
+                            <li>
+                                <button className="Timer-format_btn" onClick={() => this.switchToHMS()}>Hours : minutes : seconds</button>
+                            </li>
+                            <li>
+                                <button className="Timer-format_btn" onClick={() => this.switchToMS()}>Minutes : seconds</button>
+                            </li>
+                            <li>
+                                <button className="Timer-format_btn" onClick={() => this.switchToS()}>Seconds</button>
+                            </li>
+                        </ul>
+                    </div>
 
-                <div className="col-md-3 col-md-offset-1 m-25">
-                    <div className="row">
-                        <button className="Timer-toggle-btn" onClick={() => this.switchOnHourMinSec()}>Hours : minutes : seconds</button>
-                    </div>
-                    <div className="row">
-                        <button className="Timer-toggle-btn" onClick={() => this.switchOnMinSec()}>Minutes : seconds</button>
-                    </div>
-                    <div className="row">
-                        <button className="Timer-toggle-btn" onClick={() => this.switchOnSec()}>Seconds</button>
-                    </div>
-                </div>
-                <div className="col-md-8">
-                    <div className="row text-center m-25">
-                        <div className="col-md-6">
-                            {this.state.isStarted ?
-                                    <button onClick={()=> this.startTimer()} className="Timer-button">start</button> :
-                                    <button onClick={()=> this.stopTimer()} className="Timer-button">stop</button>
-                            }
+                    <div className="Timer-buttons">
+                        <div className="Timer-toggle">
+                            <ButtonToggle/>
+                            <button onClick={() => this.resetTimer()} className='Timer-toggle_btns'>Reset</button>
                         </div>
-                        <div className="col-md-6">
-                            <button onClick={() => this.resetTimer()} className='Timer-button'>Reset</button>
-                        </div>
-
-                    </div>
-                    <div className='row'>
-                        <div className=' text-center'>
-                            <ul className="list-inline">
+                        <div>
+                            <ul className="Timer-btn-list">
                                 <li>
                                     <button className="Timer-btns" onClick={() => this.addOneMin()}> + 1 minute </button>
                                 </li>

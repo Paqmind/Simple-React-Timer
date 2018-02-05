@@ -1,6 +1,10 @@
 .mt-20{
     margin-top: 20px;
 }
+.Time{
+    text-align: center;
+    display: block!important;
+}
 .Time-numbers{
     font-size: 70px;
     font-weight: bold;
