@@ -16,12 +16,12 @@ li{
 .m-25{
     margin: 25px;
 }
-.Timer-format{
+.Timer_format{
     display: flex;
     flex-wrap: wrap;
 
 }
-.Timer-format_btn{
+.Timer_format_btn{
     padding: 10px 10px;
     width: 400px;
     font-weight: 800;
@@ -37,7 +37,7 @@ li{
     flex-wrap: wrap;
 
 }
-.Timer-toggle_btns {
+.Timer_toggle_btn {
     padding: 8px 115px;
     font-weight: bold;
     color: black;
@@ -49,14 +49,14 @@ li{
     margin-top: 10px;
     width: 300px;
 }
-.Timer-btn-list{
+.Timer_btn-list{
     padding-top: 20px;
     display: inline-flex;
     position: relative;
     right: 13%;
 
 }
-.Timer-btns{
+.Timer_btn-list_btn{
     padding: 8px 20px;
     font-weight: bold;
     color: black;
