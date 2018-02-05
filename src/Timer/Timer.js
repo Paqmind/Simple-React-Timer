@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Time from "../Time/Time";
 import "./Timer.css"
 
+let formatToHMS = (seconds) => [Math.floor(seconds / 3600 % 24), Math.floor(seconds / 60 % 60), Math.ceil(seconds % 60)];
+let formatToMS = (seconds) => [Math.floor(seconds / 60), Math.ceil(seconds % 60)];
+let formatToS = (seconds) => [Math.floor(seconds)];
 
 class Timer extends React.Component{
     constructor(props) {
@@ -10,34 +13,22 @@ class Timer extends React.Component{
             startValue : 7400,
             seconds: 7400,
             isStarted:true,
-            formatHourMinSec: false,
-            formatMinSec: false,
-            formatSec: false
+            format: "s"
         };
     }
-    takeFormatHMS = (seconds) => Math.floor(seconds / 3600 % 24) + ":" + Math.floor(seconds / 60 % 60) + ":" +  Math.ceil(seconds % 60);
-    takeFormatMS = (seconds) => Math.floor(seconds / 60) + ":" +  Math.ceil(seconds % 60);
-    takeFormatTS = (seconds) => Math.floor(seconds);
-
     switchOnHourMinSec() {
         this.setState({
-            formatHourMinSec :  true,
-            formatMinSec : false,
-            formatSec : false
+            format : "hms"
         })
     }
     switchOnMinSec = () => {
         this.setState({
-            formatHourMinSec : false,
-            formatMinSec : true,
-            formatSec : false
+            format : "ms"
         })
     };
      switchOnSec (){
         this.setState({
-            formatHourMinSec :  false,
-            formatMinSec : false,
-            formatSec : true
+            format : "s"
         })
     }
     tick () {
@@ -89,12 +80,13 @@ class Timer extends React.Component{
 
     render() {
         let seconds = this.state.seconds;
+        let formattedTime = this.state.format == "s" ? formatToS(seconds).join(":") :
+                            this.state.format == "ms" ? formatToMS(seconds).join(":")  :
+                            this.state.format =="hms" ? formatToHMS(seconds).join(":") : "Unsupported format";
         return (
             <div className="container Timer">
-                <Time time = { (this.state.formatHourMinSec) ? this.takeFormatHMS(seconds) :
-                    (this.state.formatMinSec) ? this.takeFormatMS(seconds) :
-                        (this.state.formatSec) ? this.takeFormatTS(seconds) : "Choose time format"}
-                />
+                <Time time={formattedTime} />
+
                 <div className="col-md-3 col-md-offset-1 m-25">
                     <div className="row">
                         <button className="Timer-toggle-btn" onClick={() => this.switchOnHourMinSec()}>Hours : minutes : seconds</button>
