@@ -1,104 +1,131 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import Time from "../Time/Time";
 import "./Timer.css"
 
+let formatToHMS = (seconds) => [Math.floor(seconds / 3600 % 24), Math.floor(seconds / 60 % 60), Math.ceil(seconds % 60)];
+let formatToMS = (seconds) => [Math.floor(seconds / 60), Math.ceil(seconds % 60)];
+let formatToS = (seconds) => [Math.floor(seconds)];
 
 class Timer extends React.Component{
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            seconds : 59,
-            minutes : 59
+        this.state = {
+            startValue : 7400,
+            seconds: 7400,
+            isStarted:true,
+            format: "s"
         };
-
-        this.startTimer = this.startTimer.bind(this);
-        this.tick = this.tick.bind(this);
-        this.stopTimer = this.stopTimer.bind(this);
-        this.addOneSec = this.addOneSec.bind(this);
-        this.minusOneSec = this.minusOneSec.bind(this);
-        this.addOneMin = this.addOneMin.bind(this);
-        this.minusOneMin = this.minusOneMin.bind(this);
     }
-
+    switchToHMS() {
+        this.setState({
+            format : "hms"
+        })
+    }
+    switchToMS = () => {
+        this.setState({
+            format : "ms"
+        })
+    };
+     switchToS (){
+        this.setState({
+            format : "s"
+        })
+    }
     tick () {
-        if (this.state.seconds > 0){
+        if (this.state.seconds > 0) {
             this.setState({seconds: (this.state.seconds - 1)})
-        } else if(this.state.seconds === 0) {
-            this.setState ({
-                seconds: (this.state.seconds = 59),
-                minutes:(this.state.minutes - 1)
-            });
         }
     }
     startTimer () {
-        this.timer = setInterval(this.tick, 1000)
+        this.timer = setInterval( () => this.tick(), 1000);
+        this.setState({
+            isStarted : false
+        })
     }
     stopTimer () {
-        clearInterval(this.timer)
+        clearInterval( this.timer);
+        this.setState({
+            isStarted : true
+        })
+    }
+    resetTimer() {
+        this.setState({
+           seconds : this.state.startValue
+        })
     }
     addOneSec() {
-        if((this.state.seconds === 59)) {
-            this.setState({
-                minutes : (this.state.minutes + 1),
-                seconds : (this.state.seconds = 0)
-            })
-        } else {
-            this.setState ({
-                seconds : (this.state.seconds + 1)
-            })
-        }
+        this.setState({
+            seconds: (this.state.seconds + 1)
+        })
     }
-    minusOneSec() {
-        if (this.state.seconds === 0) {
+    subOneSec() {
+        if ( this.state.seconds > 0 ) {
             this.setState({
-                minutes : (this.state.minutes - 1),
-                seconds : (this.state.seconds = 59)
-            })
-        } else {
-            this.setState({
-                seconds : (this.state.seconds - 1)
+                seconds: (this.state.seconds - 1)
             })
         }
     }
     addOneMin() {
-        if (this.state.minutes < 59) {
-            this.setState({
-                minutes : (this.state.minutes + 1)
-            })
-        }
+        this.setState({
+            seconds : (this.state.seconds + 60)
+        })
     }
-    minusOneMin(){
-        if (this.state.minutes > 0){
+    subOneMin() {
+        if ( Math.floor(this.state.seconds) >= 60 ){
             this.setState({
-                minutes : (this.state.minutes - 1)
+                seconds : (this.state.seconds - 60)
             })
         }
     }
 
     render() {
+        let seconds = this.state.seconds;
+        let formattedTime = this.state.format === "s" ? formatToS(seconds).join(":") :
+                            this.state.format === "ms" ? formatToMS(seconds).join(":")  :
+                            this.state.format === "hms" ? formatToHMS(seconds).join(":") : "Unsupported format";
+        let ButtonToggle = () => this.state.isStarted ?
+                <button onClick={ ()=> this.startTimer() } className="Timer-toggle_btns">start</button> :
+                <button onClick={ ()=> this.stopTimer() } className="Timer-toggle_btns">stop</button>;
+
         return (
-            <div className='container Timer'>
-               <Time time={ this.state.minutes + " : " + this.state.seconds} />
-                <div className="row text-center m-25">
-                    <button onClick={this.startTimer} className="Timer-button">start</button>
-                    <button onClick={this.stopTimer} className="Timer-button">stop</button>
-                </div>
-                <div className='row'>
-                    <div className='col-md-12 text-center'>
-                        <ul className="list-inline">
+            <div className="Timer">
+                <Time time={formattedTime} />
+                <div className="flex-container">
+                    <div className="Timer-format">
+                        <ul>
                             <li>
-                                <button className="Timer-btns" onClick={this.addOneMin}> + 1 minute </button>
+                                <button className="Timer-format_btn" onClick={() => this.switchToHMS()}>Hours : minutes : seconds</button>
                             </li>
                             <li>
-                                <button className="Timer-btns" onClick={this.minusOneMin}> - 1 minute </button>
+                                <button className="Timer-format_btn" onClick={() => this.switchToMS()}>Minutes : seconds</button>
                             </li>
                             <li>
-                                <button className="Timer-btns" onClick={this.addOneSec}> + 1 second </button>
-                            </li>
-                            <li>
-                                <button className="Timer-btns" onClick={this.minusOneSec}> - 1 second </button>
+                                <button className="Timer-format_btn" onClick={() => this.switchToS()}>Seconds</button>
                             </li>
                         </ul>
+                    </div>
+
+                    <div className="Timer-buttons">
+                        <div className="Timer-toggle">
+                            <ButtonToggle/>
+                            <button onClick={() => this.resetTimer()} className='Timer-toggle_btns'>Reset</button>
+                        </div>
+                        <div>
+                            <ul className="Timer-btn-list">
+                                <li>
+                                    <button className="Timer-btns" onClick={() => this.addOneMin()}> + 1 minute </button>
+                                </li>
+                                <li>
+                                    <button className="Timer-btns" onClick={() => this.subOneMin()}> - 1 minute </button>
+                                </li>
+                                <li>
+                                    <button className="Timer-btns" onClick={() => this.addOneSec()}> + 1 second </button>
+                                </li>
+                                <li>
+                                    <button className="Timer-btns" onClick={() => this.subOneSec()}> - 1 second </button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
