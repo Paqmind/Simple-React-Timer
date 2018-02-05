@@ -27,26 +27,22 @@ class Timer extends React.Component{
             this.setState ({
                 seconds: (this.state.seconds = 59),
                 minutes:(this.state.minutes - 1)
-            })
+            });
         }
     }
-
     startTimer () {
         this.timer = setInterval(this.tick, 1000)
     }
-
     stopTimer () {
         clearInterval(this.timer)
     }
-
     addOneSec() {
-        if( (this.state.seconds === 59)  ) {
+        if((this.state.seconds === 59)) {
             this.setState({
                 minutes : (this.state.minutes + 1),
                 seconds : (this.state.seconds = 0)
             })
-        }
-        else {
+        } else {
             this.setState ({
                 seconds : (this.state.seconds + 1)
             })
