@@ -5,16 +5,29 @@
 .m-25{
     margin: 25px;
 }
-.Timer-button{
-    padding: 10px 45px;
-    font-weight: bold;
+.Timer-toggle-btn{
+    padding: 10px 10px;
+    width: 400px;
+    font-weight: 800;
     color: black;
     font-size: 25px;
+    box-shadow: 3px 1px 4px inset lavender;
+    background-color: lightcoral;
+    margin: 10px 20px;
+}
+.Timer-button{
+    padding: 8px 115px;
+    font-weight: bold;
+    color: black;
+    font-size: 27px;
     background-color: pink;
     margin: 0 20px;
+    text-transform: uppercase;
+    font-style: italic;
+    margin-top: 10px;
 }
 .Timer-btns{
-    padding: 10px 20px;
+    padding: 8px 20px;
     font-weight: bold;
     color: black;
     font-size: 25px;

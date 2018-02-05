@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import Time from "../Time/Time";
 import "./Timer.css"
 
@@ -6,99 +6,123 @@ import "./Timer.css"
 class Timer extends React.Component{
     constructor(props){
         super(props);
-        this.state={
-            seconds : 59,
-            minutes : 59
+        this.state = {
+            seconds : 7300,
+            isToHMS : false,
+            isToMs : false,
+            isToS : false
         };
-
-        this.startTimer = this.startTimer.bind(this);
-        this.tick = this.tick.bind(this);
-        this.stopTimer = this.stopTimer.bind(this);
-        this.addOneSec = this.addOneSec.bind(this);
-        this.minusOneSec = this.minusOneSec.bind(this);
-        this.addOneMin = this.addOneMin.bind(this);
-        this.minusOneMin = this.minusOneMin.bind(this);
+        this.formatToMS = this.formatToMS.bind(this);
+        this.formatToHMS = this.formatToHMS.bind(this);
+        this.formatToS = this.formatToS.bind(this);
     }
-
+    formatToHMS(seconds) {
+        return Math.floor(seconds / 3600 % 24) + " : " + Math.floor(seconds / 60 % 60) + ":" +  Math.ceil(seconds % 60);
+    }
+    toHMS() {
+        this.setState({
+            isToHMS : (this.state.isToHMS = true),
+            isToMS : (this.state.isToMs = false),
+            isToS : (this.state.isToS = false)
+        })
+    }
+    formatToMS(seconds) {
+      return Math.floor(seconds / 60) + ":" +  Math.ceil(seconds % 60);
+    }
+    toMS() {
+        this.setState({
+            isToHMS : (this.state.isToHMS = false),
+            isToMS : (this.state.isToMs = true),
+            isToS : (this.state.isToS = false)
+        })
+    }
+    formatToS(seconds) {
+        return Math.floor(seconds)
+    }
+    toS() {
+        this.setState({
+            isToHMS : (this.state.isToHMS = false),
+            isToMS : (this.state.isToMs = false),
+            isToS : (this.state.isToS = true)
+        })
+    }
     tick () {
-        if (this.state.seconds > 0){
+        if (this.state.seconds > 0) {
             this.setState({seconds: (this.state.seconds - 1)})
-        } else if(this.state.seconds === 0) {
-            this.setState ({
-                seconds: (this.state.seconds = 59),
-                minutes:(this.state.minutes - 1)
-            });
         }
     }
     startTimer () {
-        this.timer = setInterval(this.tick, 1000)
+        this.timer = setInterval( () => this.tick(), 1000)
     }
     stopTimer () {
-        clearInterval(this.timer)
+        clearInterval( this.timer)
     }
     addOneSec() {
-        if((this.state.seconds === 59)) {
-            this.setState({
-                minutes : (this.state.minutes + 1),
-                seconds : (this.state.seconds = 0)
-            })
-        } else {
-            this.setState ({
-                seconds : (this.state.seconds + 1)
-            })
-        }
+        this.setState({
+            seconds: (this.state.seconds + 1)
+        })
     }
     minusOneSec() {
-        if (this.state.seconds === 0) {
+        if ( this.state.seconds > 0 ) {
             this.setState({
-                minutes : (this.state.minutes - 1),
-                seconds : (this.state.seconds = 59)
-            })
-        } else {
-            this.setState({
-                seconds : (this.state.seconds - 1)
+                seconds: (this.state.seconds - 1)
             })
         }
     }
     addOneMin() {
-        if (this.state.minutes < 59) {
-            this.setState({
-                minutes : (this.state.minutes + 1)
+        this.setState({
+                seconds : (this.state.seconds + 60)
             })
-        }
     }
-    minusOneMin(){
-        if (this.state.minutes > 0){
+    minusOneMin() {
+        if ( Math.floor(Math.floor(this.state.seconds) > 0) ){
             this.setState({
-                minutes : (this.state.minutes - 1)
+                seconds : (this.state.seconds - 60)
             })
         }
     }
 
     render() {
+        let seconds = this.state.seconds;
         return (
-            <div className='container Timer'>
-               <Time time={ this.state.minutes + " : " + this.state.seconds} />
-                <div className="row text-center m-25">
-                    <button onClick={this.startTimer} className="Timer-button">start</button>
-                    <button onClick={this.stopTimer} className="Timer-button">stop</button>
+            <div className="container Timer">
+                <Time time = { (this.state.isToHMS) ? this.formatToHMS(seconds) :
+                    (this.state.isToMs) ? this.formatToMS(seconds) :
+                        (this.state.isToS) ? this.formatToS(seconds) : "Choose time format" }
+                />
+                <div className="col-md-3 col-md-offset-1 m-25">
+                    <div className="row">
+                        <button className="Timer-toggle-btn" onClick={() => this.toHMS()}>Hours : minutes : seconds</button>
+                    </div>
+                    <div className="row">
+                        <button className="Timer-toggle-btn" onClick={() => this.toMS()}>Minutes : seconds</button>
+                    </div>
+                    <div className="row">
+                        <button className="Timer-toggle-btn" onClick={() => this.toS()}>Seconds</button>
+                    </div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-12 text-center'>
-                        <ul className="list-inline">
-                            <li>
-                                <button className="Timer-btns" onClick={this.addOneMin}> + 1 minute </button>
-                            </li>
-                            <li>
-                                <button className="Timer-btns" onClick={this.minusOneMin}> - 1 minute </button>
-                            </li>
-                            <li>
-                                <button className="Timer-btns" onClick={this.addOneSec}> + 1 second </button>
-                            </li>
-                            <li>
-                                <button className="Timer-btns" onClick={this.minusOneSec}> - 1 second </button>
-                            </li>
-                        </ul>
+                <div className="col-md-8">
+                    <div className="row text-center m-25">
+                        <button onClick={() => this.startTimer()} className="Timer-button">start</button>
+                        <button onClick={() => this.stopTimer()} className="Timer-button">stop</button>
+                    </div>
+                    <div className='row'>
+                        <div className=' text-center'>
+                            <ul className="list-inline">
+                                <li>
+                                    <button className="Timer-btns" onClick={() => this.addOneMin()}> + 1 minute </button>
+                                </li>
+                                <li>
+                                    <button className="Timer-btns" onClick={() => this.minusOneMin()}> - 1 minute </button>
+                                </li>
+                                <li>
+                                    <button className="Timer-btns" onClick={() => this.addOneSec()}> + 1 second </button>
+                                </li>
+                                <li>
+                                    <button className="Timer-btns" onClick={() => this.minusOneSec()}> - 1 second </button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
