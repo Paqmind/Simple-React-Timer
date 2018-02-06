@@ -27,7 +27,7 @@ class Timer extends React.Component{
             format : "ms"
         })
     };
-     switchToS (){
+    switchToS (){
         this.setState({
             format : "s"
         })
@@ -86,6 +86,7 @@ class Timer extends React.Component{
         let formattedTime = this.state.format === "s" ? formatToS(seconds).join(":") :
                             this.state.format === "ms" ? formatToMS(seconds).join(":")  :
                             this.state.format === "hms" ? formatToHMS(seconds).join(":") : "Unsupported format";
+
         let ButtonToggle = () => this.state.isStarted ?
                 <button onClick={ ()=> this.startTimer() } className="Timer_toggle_btn">start</button> :
                 <button onClick={ ()=> this.stopTimer() } className="Timer_toggle_btn">stop</button>;
@@ -130,6 +131,7 @@ class Timer extends React.Component{
                             </ul>
                         </div>
                     </div>
+
                 </div>
             </div>
         )
