@@ -16,6 +16,7 @@ class Timer extends React.Component{
             format: "s"
         };
     }
+
     switchToHMS() {
         this.setState({
             format : "hms"
@@ -31,6 +32,7 @@ class Timer extends React.Component{
             format : "s"
         })
     }
+
     tick () {
         if (this.state.seconds > 0) {
             this.setState({seconds: (this.state.seconds - 1)})
@@ -53,6 +55,7 @@ class Timer extends React.Component{
            seconds : this.state.startValue
         })
     }
+
     addOneSec() {
         this.setState({
             seconds: (this.state.seconds + 1)
