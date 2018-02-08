@@ -10,18 +10,18 @@ li{
     border: 1px solid lightgray;
 
 }
-.flex-container{
+.Timer__b-main{
     display: flex;
 }
 .m-25{
     margin: 25px;
 }
-.Timer_format{
+.Timer__b-main__format-btns{
     display: flex;
     flex-wrap: wrap;
 
 }
-.Timer_format_btn{
+.Timer__b-main__format-btns__btn{
     padding: 10px 10px;
     width: 400px;
     font-weight: 800;
@@ -31,13 +31,13 @@ li{
     background-color: lightcoral;
     margin: 10px 20px;
 }
-.Timer-buttons{
+.Timer__b-main__b-time-change{
     margin-left: 15%;
     margin-top: 15px;
     flex-wrap: wrap;
 
 }
-.Timer_toggle_btn {
+.Timer__b-main__b-time-change__toggle-btn {
     padding: 8px 115px;
     font-weight: bold;
     color: black;
@@ -49,14 +49,14 @@ li{
     margin-top: 10px;
     width: 300px;
 }
-.Timer_btn-list{
+.Timer__b-main__b-time-change__btn-list{
     padding-top: 20px;
     display: inline-flex;
     position: relative;
     right: 13%;
 
 }
-.Timer_btn-list_btn{
+.Timer__b-main__b-time-change__btn-list__btn{
     padding: 8px 20px;
     font-weight: bold;
     color: black;
@@ -64,4 +64,13 @@ li{
     background-color: red;
     margin: 10px 20px;
 
+}
+@media (max-width: 767px),(min-width: 768px) and (max-width: 991px),(min-width: 991px) and (max-width: 1199px),(min-width: 1100px)
+and (max-width:1450px ) {
+    .Timer__b-main{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+
+    }
 }

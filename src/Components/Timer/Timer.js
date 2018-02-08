@@ -88,45 +88,60 @@ class Timer extends React.Component{
                             this.state.format === "hms" ? formatToHMS(seconds).join(":") : "Unsupported format";
 
         let ButtonToggle = () => this.state.isStarted ?
-                <button onClick={ ()=> this.startTimer() } className="Timer_toggle_btn">start</button> :
-                <button onClick={ ()=> this.stopTimer() } className="Timer_toggle_btn">stop</button>;
+                <button onClick={ ()=> this.startTimer() } className="Timer__b-main__b-time-change__toggle-btn">start</button> :
+                <button onClick={ ()=> this.stopTimer() } className="Timer__b-main__b-time-change__toggle-btn">stop</button>;
 
         return (
             <div className="Timer">
                 <Time time={formattedTime} />
-                <div className="flex-container">
-                    <div className="Timer_format">
+
+                <div className="Timer__b-main">
+                    <div className="Timer__b-main__format-btns">
                         <ul>
                             <li>
-                                <button className="Timer_format_btn" onClick={() => this.switchToHMS()}>Hours : minutes : seconds</button>
+                                <button className="Timer__b-main__format-btns__btn"
+                                        onClick={() => this.switchToHMS()}>Hours : minutes : seconds
+                                </button>
                             </li>
                             <li>
-                                <button className="Timer_format_btn" onClick={() => this.switchToMS()}>Minutes : seconds</button>
+                                <button className="Timer__b-main__format-btns__btn"
+                                        onClick={() => this.switchToMS()}>Minutes : seconds
+                                </button>
                             </li>
                             <li>
-                                <button className="Timer_format_btn" onClick={() => this.switchToS()}>Seconds</button>
+                                <button className="Timer__b-main__format-btns__btn"
+                                        onClick={() => this.switchToS()}>Seconds
+                                </button>
                             </li>
                         </ul>
                     </div>
 
-                    <div className="Timer-buttons">
-                        <div className="Timer_toggle">
-                            <ButtonToggle/>
-                            <button onClick={() => this.resetTimer()} className='Timer_toggle_btn'>Reset</button>
-                        </div>
+                    <div className="Timer__b-main__b-time-change">
+
+                        <ButtonToggle/>
+                        <button onClick={() => this.resetTimer()} className='Timer__b-main__b-time-change__toggle-btn'>Reset</button>
+
                         <div>
-                            <ul className="Timer_btn-list">
+                            <ul className="Timer__b-main__b-time-change__btn-list">
                                 <li>
-                                    <button className="Timer_btn-list_btn" onClick={() => this.addOneMin()}> + 1 minute </button>
+                                    <button className="Timer__b-main__b-time-change__btn-list__btn"
+                                            onClick={() => this.addOneMin()}> + 1 minute
+                                    </button>
                                 </li>
                                 <li>
-                                    <button className="Timer_btn-list_btn" onClick={() => this.subOneMin()}> - 1 minute </button>
+                                    <button className="Timer__b-main__b-time-change__btn-list__btn"
+                                            onClick={() => this.subOneMin()}> - 1 minute
+                                    </button>
                                 </li>
                                 <li>
-                                    <button className="Timer_btn-list_btn" onClick={() => this.addOneSec()}> + 1 second </button>
+                                    <button className="Timer__b-main__b-time-change__btn-list__btn"
+                                            onClick={() => this.addOneSec()}> + 1 second
+                                    </button>
                                 </li>
                                 <li>
-                                    <button className="Timer_btn-list_btn" onClick={() => this.subOneSec()}> - 1 second </button>
+                                    <button className="Timer__b-main__b-time-change__btn-list__btn"
+                                            onClick={() => this.subOneSec()}> - 1 second
+                                    </button>
                                 </li>
                             </ul>
                         </div>

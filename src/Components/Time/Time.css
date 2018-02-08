@@ -1,7 +1,7 @@
 
 .Time{
-    text-align: center;
-    display: block!important;
+    display: flex;
+    justify-content: center;
 }
 .Time__numbers{
     font-size: 70px;
