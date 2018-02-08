@@ -37,7 +37,7 @@ li{
     flex-wrap: wrap;
 
 }
-.Timer__b-main__b-time-change__toggle-btn {
+.Timer__b-main__b-time-change__toggle-btns__btn {
     padding: 8px 115px;
     font-weight: bold;
     color: black;
@@ -46,7 +46,6 @@ li{
     margin: 0 20px;
     text-transform: uppercase;
     font-style: italic;
-    margin-top: 10px;
     width: 300px;
 }
 .Timer__b-main__b-time-change__btn-list{
@@ -65,12 +64,36 @@ li{
     margin: 10px 20px;
 
 }
-@media (max-width: 767px),(min-width: 768px) and (max-width: 991px),(min-width: 991px) and (max-width: 1199px),(min-width: 1100px)
-and (max-width:1450px ) {
+@media (max-width: 300px) and (min-height: 568px),
+(max-width: 767px),(min-width: 768px) and (max-width: 991px),(min-width: 991px)
+and (max-width: 1199px),(min-width: 1100px) and (max-width:1450px ) {
     .Timer__b-main{
         display: flex;
         flex-flow: row wrap;
         justify-content: center;
 
+    }
+}
+@media (max-width: 766px)  {
+    body{
+        margin: 0;
+    }
+    .Timer__b-main__format-btns__btn{
+        width: 200px;
+        font-size: 20px;
+        justify-content: center;
+    }
+    .Timer__b-main__b-time-change__toggle-btns__btn{
+        display: flex;
+        flex-flow: row wrap;
+        margin-left: 15%;
+        margin-bottom: 20px;
+        padding: 10px 50px;
+
+    }
+    .Timer__b-main__b-time-change__btn-list{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
     }
 }

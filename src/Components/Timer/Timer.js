@@ -88,8 +88,8 @@ class Timer extends React.Component{
                             this.state.format === "hms" ? formatToHMS(seconds).join(":") : "Unsupported format";
 
         let ButtonToggle = () => this.state.isStarted ?
-                <button onClick={ ()=> this.startTimer() } className="Timer__b-main__b-time-change__toggle-btn">start</button> :
-                <button onClick={ ()=> this.stopTimer() } className="Timer__b-main__b-time-change__toggle-btn">stop</button>;
+                <button onClick={ ()=> this.startTimer() } className="Timer__b-main__b-time-change__toggle-btns__btn">start</button> :
+                <button onClick={ ()=> this.stopTimer() } className="Timer__b-main__b-time-change__toggle-btns__btn">stop</button>;
 
         return (
             <div className="Timer">
@@ -117,9 +117,13 @@ class Timer extends React.Component{
                     </div>
 
                     <div className="Timer__b-main__b-time-change">
+                        <div className="Timer__b-main__b-time-change__toggle-btns">
+                            <ButtonToggle/>
+                            <button onClick={() => this.resetTimer()}
+                                    className='Timer__b-main__b-time-change__toggle-btns__btn'>Reset
+                            </button>
+                        </div>
 
-                        <ButtonToggle/>
-                        <button onClick={() => this.resetTimer()} className='Timer__b-main__b-time-change__toggle-btn'>Reset</button>
 
                         <div>
                             <ul className="Timer__b-main__b-time-change__btn-list">
